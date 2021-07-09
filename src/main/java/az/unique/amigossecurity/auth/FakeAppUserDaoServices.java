@@ -1,6 +1,7 @@
 package az.unique.amigossecurity.auth;
 
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -11,10 +12,11 @@ import java.util.Set;
 import static az.unique.amigossecurity.security.UserRoles.*;
 
 @Repository("fake")
-public class AppUserDaoServices implements AppUserDao{
+public class FakeAppUserDaoServices implements AppUserDao{
     private final PasswordEncoder passwordEncoder;
 
-    public AppUserDaoServices(PasswordEncoder passwordEncoder) {
+    @Autowired
+    public FakeAppUserDaoServices(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -30,7 +32,7 @@ public class AppUserDaoServices implements AppUserDao{
         List<AppUser> appUsers = Lists.newArrayList(
             new AppUser(
                     "abbas",
-                    passwordEncoder.encode("password"),
+                    passwordEncoder.encode("123456"),
                     STUDENT.getGrantedAuthorities(),
                     true,
                     true,
@@ -39,7 +41,7 @@ public class AppUserDaoServices implements AppUserDao{
                     ),
                     new AppUser(
                             "admin",
-                            passwordEncoder.encode("password"),
+                            passwordEncoder.encode("123456"),
                             ADMIN.getGrantedAuthorities(),
                             true,
                             true,
@@ -48,7 +50,7 @@ public class AppUserDaoServices implements AppUserDao{
                     ),
                     new AppUser(
                             "tom",
-                            passwordEncoder.encode("password"),
+                            passwordEncoder.encode("123456"),
                             ADMINTRAINEE.getGrantedAuthorities(),
                             true,
                             true,

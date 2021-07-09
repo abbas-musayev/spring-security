@@ -9,22 +9,22 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/student")
 public class Controller {
 
 
     private static final List<Student> list = Arrays.asList(
-            new Student("abbas","123456"),
-            new Student("resul","123456"),
-            new Student("unknown","123456")
+            new Student(1,"abbas"),
+            new Student(2,"resul"),
+            new Student(3,"konul")
     );
 
-    @GetMapping("/{username}")
-    public Student getStudent(@PathVariable String username){
+    @GetMapping("/{id}")
+    public Student getStudent(@PathVariable Integer id){
         return list.stream().
-                filter(student -> student.getUsername().equals(username)).
+                filter(student -> id.equals(student.getId())).
                 findFirst().
-                orElseThrow(()-> new IllegalStateException(username));
+                orElseThrow(()-> new IllegalStateException(id.toString()));
     }
 
 }
